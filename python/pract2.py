@@ -59,8 +59,17 @@ if __name__ == '__main__':
 # Father Classes
 class Figure:
     def __init__(self, height: float, width: float) -> None:
-        self._height = height
-        self._width = width
+        # Adding validation!
+        if self._validate_value(height):
+            self._height = height
+        else:
+            self._height = 0
+
+        if self._validate_value(width):
+            self._width = width
+        else:
+            self._width = 0 
+
     # Override
     def __str__(self):
         return f'FigureClass: [height: {self._height}, width: {self._width}]'
@@ -77,7 +86,33 @@ class Figure:
 
     def set_width(self, width):
         self._width = width
+    
+    # Other way to get/set values
+    @property
+    def width(self):
+        return self._width
+    
+    @width.setter
+    def width(self, width):
+        if self._validate_value(width):
+            self._width = width
+        else:
+            print('Value not valid!')
 
+    @property
+    def height(self):
+        return self._height
+    
+    @height.setter
+    def height(self, height):
+        if self._validate_value(height):
+            self._height = height
+        else:
+            print('Value not valid!')
+            
+    # Validation function
+    def _validate_value(self, value: float) -> bool:
+        return True if 0 < value < 10 else False
 
 class Colour:
     def __init__(self, colour: str) -> None:
@@ -89,6 +124,19 @@ class Colour:
     
     def set_colour(self, colour: str):
         self._colour = colour
+    
+    # Other way
+    @property
+    def colour(self):
+        return self._colour
+    
+    @colour.setter
+    def colour(self, colour):
+        self._colour = colour
+
+    def __str__(self):
+        return f'ColourClass [colour: {self._colour}]'
+
 
 # Children Classes.
 class Square(Figure, Colour):
@@ -103,7 +151,7 @@ class Square(Figure, Colour):
         return self._height * self._width
     
     def __str__(self):
-        return f'SquareClass [area: {self.get_area()}], {super().__str__()}'
+        return f'SquareClass [area: {self.get_area()}], {Figure.__str__(self)}, {Colour.__str__(self)}'
 
 
 class Rectangle(Figure, Colour):
@@ -116,7 +164,7 @@ class Rectangle(Figure, Colour):
         return self._height * self._width
     
     def __str__(self):
-        return f'RectangleClass [area: {self.get_area()}], {super().__str__()}'
+        return f'RectangleClass [area: {self.get_area()}], {Figure.__str__(self)},  {Colour.__str__(self)}'
 
 
 # Test
