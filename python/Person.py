@@ -1,6 +1,4 @@
 #%% Final class
-
-
 class Person:
     def __init__(self, first_name, last_name, age) -> None:
         self._first_name = first_name # Encapsulated
@@ -45,4 +43,25 @@ class Person:
     # Destructor Class
     def __del__(self):
         print(f'Person: {self._first_name}, {self._last_name}')
+
+
+    # Method Override!
+    # If we call a print(Person) it will return a string and show this values.
+    def __str__(self) -> str:
+            return f'PersonClass[{self._first_name}, {self._last_name}, {self._age}]'
+    
+
+#%% Above this line is the topic of Inheritance!
+
+class Employee(Person):
+    def __init__(self, first_name, last_name, age, salary):
+        super().__init__(first_name, last_name, age)
+        self.salary = salary
+        pass
+
+    # Overriding father method
+    def __str__(self):
+        # We return the same values of father __str__ + salary.
+        return f'EmployeeClass[Salary: {self.salary} ]{super().__str__()}'
+
 
