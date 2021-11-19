@@ -75,3 +75,10 @@ Square.mro()
 
 # %% New practice at practic2.py
 ## Creation of two classes with multiple inheritance.
+######################
+
+#%% Abstraction.
+# It doesn't have implementation in father class but in children classes.
+# There are necessary in children classes. If we create an abstract method,
+# ALL the class turns into an abstract class, meaning we can not longer instanciate ir nor
+# create objects with it, just inherit.
