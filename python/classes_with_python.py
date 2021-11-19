@@ -173,4 +173,130 @@ person1.first_name = 'Juan Alberto'
 
 print(person1.first_name)
 # %% Read-Only attributes
-# Checking the rea
+
+# If we comment this line of the class
+# The attribute can't be modified unless it is accessed as _first_name
+@first_name.setter
+def first_name(self, first_name):
+    print('Calling second decorator')
+    self._first_name = first_name
+
+
+#%% Encapsulating all attributes
+
+class Person:
+    def __init__(self, first_name, last_name, age) -> None:
+        self._first_name = first_name # Encapsulated
+        self._last_name = last_name
+        self._age = age
+
+    # We can acces creating a decorator method, modifying the function as if
+    # it were an attribute instead a method.
+    @property
+    def first_name(self):
+        # To check if we are calling it
+        return self._first_name
+
+    # Setter method to modify _first_name attribute
+    @first_name.setter
+    def first_name(self, first_name):
+        self._first_name = first_name
+
+    @property
+    def last_name(self):
+        return self._last_name
+
+    @last_name.setter
+    def last_name(self, last_name):
+        self._last_name = last_name
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, age):
+        self._age = age
+
+    # New method
+    def show_details(self):
+        # We can acces to private parameters because we are inside the class.
+        print(f'person: {self._first_name}')
+        print(f'last name: {self._last_name}')
+        print(f'age: {self._age}')
+
+
+# We try the read-only parameters
+person1 = Person('Juan', 'Perez', 28)
+
+# Changing the name with the decorator setter
+person1.first_name = 'Juan Alberto'
+person1.last_name = 'Gomez'
+person1.age = 25
+
+person1.show_details()
+
+# %% Creation of a module with the class person
+# A file called Person will have the class and constructions
+## The file will be called person_test.py ###
+##########################################################
+
+#%% Destructors
+
+class Person:
+    def __init__(self, first_name, last_name, age) -> None:
+        self._first_name = first_name # Encapsulated
+        self._last_name = last_name
+        self._age = age
+
+    # We can acces creating a decorator method, modifying the function as if
+    # it were an attribute instead a method.
+    @property
+    def first_name(self):
+        # To check if we are calling it
+        return self._first_name
+
+    # Setter method to modify _first_name attribute
+    @first_name.setter
+    def first_name(self, first_name):
+        self._first_name = first_name
+
+    @property
+    def last_name(self):
+        return self._last_name
+
+    @last_name.setter
+    def last_name(self, last_name):
+        self._last_name = last_name
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, age):
+        self._age = age
+
+    # New method
+    def show_details(self):
+        # We can acces to private parameters because we are inside the class.
+        print(f'person: {self._first_name}')
+        print(f'last name: {self._last_name}')
+        print(f'age: {self._age}')
+
+    # Method inherit from object class
+    # All clases are children of object class
+    def __del__(self):
+        print(f'Person: {self._first_name}, {self._last_name}')
+
+
+person1 = Person
+
+print('Creation'.center(40, '-'))
+person1 = Person('Juan', 'Perez', 28)
+
+# We rarely delete objects explicit. The Python Garbage collector automatically
+# deletes objects without a variable or if the script ends.
+print('Deletion'.center(40, '-'))
+del person1
+
