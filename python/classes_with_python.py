@@ -92,4 +92,15 @@ person1.show_details()
 print('\nUsing method with the object reference')
 Person.show_details(person1)
 
-# %%
+# %% We can create attributes on the fly.
+person1.telephone = '555-555-507'
+print(person1.telephone)
+
+# But it will not be share with other objects, is unique of person1!
+# This will raise an AttributeError!
+print(person2.telephone)
+
+#%%#####################################%%
+####### Check pract1.py     #############
+#########################################
+#%%
