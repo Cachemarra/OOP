@@ -14,6 +14,7 @@ print(type(Person))
 # if not defined, python would create it in background
 # Default parameter is self, like "this" in C++
 # The pre and pos __ means that is private(pre) and (pos)
+# the __var__ is called dunder
 
 # Also add attributes of instance with self, meaning that is part of the class
 # We define default parameters. NOTE: this is not the best way to assign default values.
@@ -103,4 +104,73 @@ print(person2.telephone)
 #%%#####################################%%
 ####### Check pract1.py     #############
 #########################################
-#%%
+#%% Expanding __init__
+# To pass a variable toupe we sould use *args 
+# To pass a dictionary of data use **kwargs
+
+class Person:
+    def __init__(self, first_name, last_name, age, *args, **kwargs) -> None:
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+
+        self.args = args
+        self.kwargs = kwargs
+    
+    # New method
+    def show_details(self):
+        print(f'person: {self.first_name}')
+        print(f'last name: {self.last_name}')
+        print(f'age: {self.age}')
+        print(f'args: {self.args}')
+        print(f'kwargs : {self.kwargs}')
+
+
+# Now we can pass more arguments, even if there are not defined
+#                                     *args--------------- **kwargs-------------------
+person1 = Person('Juan', 'Perez', 28, '555-156', 1, 34, 5, name='hello', other='world')
+
+person1.show_details()
+
+
+# %% Encapsulation
+# The attributes 'first_name', 'last_name', 'age' are PUBLIC attributes and we can access
+# and modifying directly. If we want to declare that the attribute is private we should add a '_' prefix
+# in other languages it prevents the modification, but in python is just an advice to the programmer.
+# If we use '__' the attribute can't be accessed nor modified out of the class.
+class Person:
+    def __init__(self, first_name, last_name, age) -> None:
+        self._first_name = first_name # Encapsulated
+        self.__last_name = last_name
+        self.age = age
+
+    # We can acces creating a decorator method, modifying the function as if
+    # it were an attribute instead a method.
+    @property
+    def first_name(self):
+        # To check if we are calling it
+        print('Calling first decorator')
+        return self._first_name
+
+    # Setter method to modify _first_name attribute
+    @first_name.setter
+    def first_name(self, first_name):
+        print('Calling second decorator')
+        self._first_name = first_name
+
+
+person1 = Person('Juan', 'Perez', 28)
+person1._first_name = 'Otto' # <- We can modify the attribute, but if it has an '_' we shouldn't touch it.
+
+print(person1._first_name)
+person1.__last_name = 'Ramirez'
+print(person1.__last_name)
+# Checking the attribute with decorator
+print(person1.first_name)
+
+# Changing the name with the decorator setter
+person1.first_name = 'Juan Alberto'
+
+print(person1.first_name)
+# %% Read-Only attributes
+# Checking the rea
