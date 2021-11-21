@@ -12,6 +12,6 @@ each one, i'll upload here, trying to help anyone who has problems with.
 I hope the info in this repository will help you.
 
 
-**Repository maintained by @Cachemarra**
+**Repository maintained by [Cachemarra](!https://github.com/Cachemarra/OOP)**
 
 
