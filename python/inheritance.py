@@ -24,4 +24,4 @@ person1.show_details()
 print(f'Salary: {person1.salary}')
 
 
-# %% Operators override
+    def __init__(self, width: float, height: float, colour: str) -> None:
