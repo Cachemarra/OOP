@@ -28,6 +28,7 @@ if __name__ == "__main__":
 
     product2 = Product("TV", 500)
     print(product2)
+    
 # %% Creating a Order class.
 class Order:
     order_cont = 0
