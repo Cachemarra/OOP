@@ -6,3 +6,12 @@ I have found.
 
 I hope you'll find it useful to learn!
 
+## Order of reading:
+
+1. classes_with_python
+2. pract1
+3. inheritance
+4. pract2
+5. override
+6. pract3
+7. lab_practice
