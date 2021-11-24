@@ -11,7 +11,7 @@ There would be 4 options:
 
 """
 from classes import MovieCatalog
-from movie_catalog_project.classes import Movie
+
 
 # enumerate constant
 ADDMOVIE = 1
@@ -22,10 +22,13 @@ CLOSE = 4
 # initializing variables
 movie_name = str
 
+movies_path = './movies.txt'
 #%% Creating the menu
 
 if __name__ == '__main__':
     option = 0
+    MovieCatalog(movies_path)
+
     # Menu
     while option != CLOSE:
         
@@ -35,31 +38,43 @@ if __name__ == '__main__':
         print('\t2.\t Show Movies')
         print('\t3.\t Delete All Movies')
         print('\t4.\t Close Program')
-        option = int(input('Welcome, Select your option!'))
+        try:
+            option = int(input('Welcome, Select your option!'))
+        
+        except Exception:
+            option = 0
+            
+        print('\n')
 
         if option == ADDMOVIE:
             # add a movie
+            print('Adding Movie!'.center(45, '-'))
             movie_name = input("What's the Movie's name?")
             MovieCatalog.addMovie(movie_name)
-            pass
+            print('Movie added!')
 
         elif option == SHOWMOVIES:
             # Show the list of movies
-            pass
+            print('Printing Movie Catalog')
+            MovieCatalog.showMovies()
+
 
         elif option == DELETEMOVIES:
             # Delete all movies
-            pass
+            print('Deleting all movies.')
+            MovieCatalog.delete()
+            print('All movies are deleted.')
         
         elif option == CLOSE:
             # Closing the program
-            pass
+            print('Closing program'.center(45, '*'))
+            break
 
-        else
+        else:
             # Unconsidered cases
             print('[ERROR] No valid option, try again.')
+            option = 0
         
 
 
 # %%
-()
