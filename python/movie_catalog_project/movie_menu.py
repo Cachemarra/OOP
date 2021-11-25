@@ -38,7 +38,12 @@ if __name__ == '__main__':
         print('\t2.\t Show Movies')
         print('\t3.\t Delete All Movies')
         print('\t4.\t Close Program')
-        option = int(input('Welcome, Select your option!'))
+        try:
+            option = int(input('Welcome, Select your option!'))
+        
+        except Exception:
+            option = 0
+            
         print('\n')
 
         if option == ADDMOVIE:

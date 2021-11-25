@@ -17,3 +17,4 @@ I hope you'll find it useful to learn!
 7. lab_practice
 8. movie_catalog_project/classes
 9. movie_catalog_project/test_movie_catalog
+10. postgresql/db_classes_p1.py
