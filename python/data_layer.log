@@ -2,3 +2,15 @@
 07:54:51 PM: DEBUG [db_classes_p1.py:156] [SUCCESS] Cursor created <cursor object at 0x0000025D0E51B9E0; closed: 0>
 11:51:11 AM: DEBUG [db_classes_p1.py:139] [SUCCESS] Connected to Database <connection object at 0x00000229C21AC370; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
 11:51:11 AM: DEBUG [db_classes_p1.py:156] [SUCCESS] Cursor created <cursor object at 0x00000229C240C9E0; closed: 0>
+12:06:20 PM: DEBUG [Connection.py:52] [SUCCESS] Pool created succesfully. <psycopg2.pool.SimpleConnectionPool object at 0x000001C1F5C7D040>
+12:06:20 PM: DEBUG [Connection.py:70] [SUCCESS] Connection stablished succesfully. <connection object at 0x000001C1F5A0A150; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
+12:06:20 PM: DEBUG [Connection.py:70] [SUCCESS] Connection stablished succesfully. <connection object at 0x000001C1F5CAF590; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
+12:06:20 PM: DEBUG [Connection.py:70] [SUCCESS] Connection stablished succesfully. <connection object at 0x000001C1F5CAFAE0; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
+12:06:20 PM: DEBUG [Connection.py:80] [SUCCESS] Connection returned to the pool succesfully. <connection object at 0x000001C1F5A0A150; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
+12:06:20 PM: DEBUG [Connection.py:91] [SUCCESS] Connection closed succesfully.
+12:08:50 PM: DEBUG [Connection.py:52] [SUCCESS] Pool created succesfully. <psycopg2.pool.SimpleConnectionPool object at 0x000002042AFFD040>
+12:08:50 PM: DEBUG [Connection.py:70] [SUCCESS] Connection stablished succesfully. <connection object at 0x000002042AD8A150; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
+12:08:50 PM: DEBUG [Connection.py:70] [SUCCESS] Connection stablished succesfully. <connection object at 0x000002042B02F590; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
+12:08:50 PM: DEBUG [Connection.py:70] [SUCCESS] Connection stablished succesfully. <connection object at 0x000002042B02FAE0; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
+12:08:50 PM: DEBUG [Connection.py:80] [SUCCESS] Connection returned to the pool succesfully. <connection object at 0x000002042AD8A150; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
+12:08:50 PM: DEBUG [Connection.py:91] [SUCCESS] All Connections closed succesfully.

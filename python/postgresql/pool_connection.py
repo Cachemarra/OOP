@@ -18,7 +18,6 @@ log.basicConfig(level=log.DEBUG,
 
 
 
-
 class Connection:
 
     _DATABASE = 'test_db'
