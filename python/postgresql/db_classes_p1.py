@@ -69,47 +69,47 @@ log.basicConfig(level=log.DEBUG,
 
 class Person:
     
-    def __init__(self, personid: int=None, firstname: str = None, lastname: str = None, mail: str = None):
+    def __init__(self, personid: str=None, firstname: str = None, lastname: str = None, mail: str = None):
         self._personid = personid
         self._firstname = firstname
         self._lastname = lastname
         self._mail = mail
 
     def __str__(self):
-        return f"PersonID: {self.personid}, FullName: {self.firstname} {self.lastname}, email: {self.mail}"
+        return f"PersonID: {self._personid}, FullName: {self._firstname} {self._lastname}, email: {self._mail}"
 
     # Getters and Setters
     @property
     def personid(self):
-        return self.__personid
+        return self._personid
 
     @property
     def firstname(self):
-        return self.__firstname
+        return self._firstname
     
     @property
     def lastname(self):
-        return self.__lastname
+        return self._lastname
 
     @property
     def mail(self):
-        return self.__mail
+        return self._mail
 
     @personid.setter
     def personid(self, value):
-        self.__personid = value
+        self._personid = value
 
     @firstname.setter
     def firstname(self, value):
-        self.__firstname = value
+        self._firstname = value
     
     @lastname.setter
     def lastname(self, value):
-        self.__lastname = value
+        self._lastname = value
 
     @mail.setter
     def mail(self, value):
-        self.__mail = value
+        self._mail = value
 
 
 
@@ -160,41 +160,78 @@ class Connection:
                 log.error(f"Error creating cursor: {e}")
                 sys.exit(1)
 
-        return cls.cursor
+        return cls._cursor
 
     
     @classmethod
     def closeConnection(cls):
         # Close the connection
-        if cls.connection is not None:
-            cls.cursor.close()
-            cls.connection.close()
-            cls.connection = None
-            cls.cursor = None
+        if cls._connection is not None:
+            cls._cursor.close()
+            cls._connection.close()
+            cls._connection = None
+            cls._cursor = None
 
 
 class PersonDAO:
+    '''
+    DAO: Data Access Object
+    CRUD: Create, Read, Update, Delete
+    '''
     # Class attributes
-    SELECTION = "SELECT * FROM person WHERE personid = %s"
-    INSERTION = "INSERT INTO person (first_name, last_name, email) VALUES(%s, %s, %s)"
-    UPDATE = "UPDATE person SET first_name = %s, last_name = %s, email = %s WHERE personid = %s"
-    DELETION = "DELETE FROM person WHERE personid = %s"
+    _SELECTION = "SELECT * FROM person ORDER BY  personid"
+    _INSERTION = "INSERT INTO person (first_name, last_name, email) VALUES(%s, %s, %s)"
+    _UPDATE = "UPDATE person SET first_name = %s, last_name = %s, email = %s WHERE personid = %s"
+    _DELETION = "DELETE FROM person WHERE personid = %s"
 
     # class methods
     @classmethod
-    def select(cls, personid) -> Person:
-        # Create a connection
-        connection = Connection.getConnection()
-        # Create a cursor
-        cursor = Connection.getCursor()
-        # Execute the query
-        cursor.execute(cls.SELECTION, (personid,))
-        # Get the result
-        result = cursor.fetchone()
-        # Close the connection
-        Connection.closeConnection()
-        # Create the object
-        return Person(result[0], result[1], result[2], result[3])
+    def select(cls) -> Person:
+        with Connection.getConnection():
+            with Connection.getCursor() as cursor:
+                # Execute the query
+                cursor.execute(cls._SELECTION)
+                # Fetch the results
+                result = cursor.fetchall()
+                persons = []
+
+                for row in result:
+                    person = Person(row[0], row[1], row[2], row[3])
+                    persons.append(person)
+
+                log.debug(f'[SUCCESS] Result: {result}')
+                return persons
+
+
+    @classmethod
+    def insert(cls, person: Person):
+
+        with Connection.getConnection() as connection:
+            with connection.cursor() as cursor:
+                values = (person.firstname, person.lastname, person.mail)
+                cursor.execute(cls._INSERTION, values)
+                log.debug(f'[SUCCESS] Person inserted, {person}')
+                return cursor.rowcount
+
+
+    @classmethod
+    def update(cls, person: Person):
+        with Connection.getConnection() as connection:
+            with connection.cursor() as cursor:
+                values = (person.firstname, person.lastname, person.mail, person.personid)  # personid is the primary key
+                cursor.execute(cls._UPDATE, values)
+                log.debug(f'[SUCCESS] Person updated, {person}')
+                return cursor.rowcount
+
+
+    @classmethod
+    def delete(cls, person: Person):
+        with Connection.getConnection() as connection:
+            with connection.cursor() as cursor:
+                values = (person.personid, )
+                cursor.execute(cls._DELETION, values)
+                log.debug(f'[SUCCESS] Person deleted, {person}')
+                return cursor.rowcount
 
 
 
@@ -203,10 +240,10 @@ class PersonDAO:
 if __name__ == "__main__":
     
     # Testing person class
-    person = Person(1, "John", "Doe", "jdoe@mail.com")
+    person = Person(1, "Benito", "vecinos", "bvecinos@mail.com")
     
     log.debug(person)
-
+    
     # Create a connection
     # Testing Connection class
     Connection.getConnection()
@@ -214,6 +251,26 @@ if __name__ == "__main__":
     # Testing Cursor 
     Connection.getCursor()
 
+    # Testing PersonDAO
+    inserted_persons = PersonDAO.insert(person)
+    log.debug(f'[SUCCESS] {inserted_persons} person inserted')
 
+    # Select objects
+    persons = PersonDAO.select()
+    for person in persons:
+        log.debug(person)
+    
+
+    '''    # Update object
+    # Modifying the first register
+    person1 = Person(1, "Antonio", "Badia", 'produccionessincontexto@mail.com')
+    updated_persons = PersonDAO.update(person1)
+    log.debug(f'[SUCCESS] {updated_persons} person updated')
+    '''
+
+    # Delete object
+    personD = Person(personid='16')
+    deleted_persons = PersonDAO.delete(personD)
+    log.debug(f'[SUCCESS] {deleted_persons} person deleted')
 
 # %%
