@@ -39,7 +39,7 @@ class PoolCursor:
         # If exception_value exists, will apply a rollback
         if exception_value:
             self._conn.rollback()
-            log.error(f'[ERROR] An exception has ocurred, rollbacking. \n Error Message: {value}, {type}, {traceback}')
+            log.error(f'[ERROR] An exception has ocurred, rollbacking. \n Error Message: {exception_value}, {exception_type}, {traceback}')
         
         # No errors nor exceptions
         else:

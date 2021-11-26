@@ -82,6 +82,7 @@ _enter_ and _exit_ methods are for the `with` implementation to work with cursor
 ## UserDAO
 
 **Parameters:**
+
     <<static>>
     SELECT: str
     INSERT: str
