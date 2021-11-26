@@ -1,19 +1,8 @@
 #%% User DAO class.
 
-import psycopg2
-import logging as log
-import sys # To exit the program
-import PoolCursor
-import User
-from postgresql.db_classes_p1 import Person, PersonDAO
-
-
-log.basicConfig(level=log.DEBUG,
-                format='%(asctime)s: %(levelname)s [%(filename)s:%(lineno)s] %(message)s',
-                datefmt='%I:%M:%S %p'
-                )
-
-
+from logger_base import log
+from PoolCursor import PoolCursor
+from User import User
 
 #%% DAO class.
 
@@ -23,10 +12,10 @@ class userDAO:
 
     # Class/static parameters. 
 
-    _SELECT = 'SELECT * FROM persona'
-    _INSERT = 'INSERT INTO person(userid, username, password) VALUES(%s, %s, %s)'
-    _UPDATE = 'UPDATE person SET userid = %s, username = %s, password = %s'
-    _DELETE = 'DELETE FROM person WHERE userid = %s'
+    _SELECT = 'SELECT * FROM users'
+    _INSERT = 'INSERT INTO users(username, password) VALUES(%s, %s)'
+    _UPDATE = 'UPDATE users SET username = %s, password = %s WHERE userid = %s'
+    _DELETE = 'DELETE FROM users WHERE userid = %s'
 
     # classmethods
 
@@ -51,7 +40,7 @@ class userDAO:
     @classmethod
     def insert(cls, user: User):
         with PoolCursor() as cursor:
-            values = (user.userid, user.username, user.password)
+            values = (user.username, user.password)
             cursor.execute(cls._INSERT, values)
 
             log.debug(f'[SUCCESS] User inserted in the database. {user}')
@@ -61,7 +50,7 @@ class userDAO:
     @classmethod
     def update(cls, user: User):
         with PoolCursor() as cursor:
-            values = (user.userid, user.username, user.password)
+            values = (user.username, user.password, user.userid)
             cursor.execute(cls._UPDATE, values)
 
             log.debug(f'[SUCCESS] User updated successfully. {user}')
@@ -100,17 +89,19 @@ if __name__ == '__main__':
 
     # Insert method
     print('Insert'.center(45, '-'))
-    user = Person('10', 'Albert', 'pAzSW0rd')
+    user = User('10', 'Albert', 'pAzSW0rd')
     userDAO.insert(user)
+    print('\n')
 
     # Update
     print('Update'.center(45, '-'))
-    user = Person('1', 'Antonio', 'lEYendYT4s')
+    user = User('2', 'Antonio', 'lEYendYT4s')
     userDAO.update(user)
     userDAO.select()
+    print('\n')
 
     # Delete
     print('Delete'.center(45, '-'))
-    userDAO.delete(25)
+    userDAO.delete(4)
     userDAO.select()
 

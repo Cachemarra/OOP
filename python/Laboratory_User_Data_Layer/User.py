@@ -1,17 +1,6 @@
 #%% User class
 
-from os import close
-from psycopg2 import pool
-import logging as log
-import sys
-from Connection import Connection
-
-# Basic configuration for the logger
-log.basicConfig(level=log.DEBUG,
-                format='%(asctime)s: %(levelname)s [%(filename)s:%(lineno)s] %(message)s',
-                datefmt='%I:%M:%S %p'
-                )
-
+from logger_base import log
 
 #%% Class to add users to the dataset
 
