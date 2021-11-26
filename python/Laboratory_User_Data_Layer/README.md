@@ -13,6 +13,8 @@ You should be able to create a table and add users, delete or update.
 - Logger_Base
 - Menu (this could not be a class but a main file.)
 
+-----------------------
+
 ## Connection
 **Parameters:**
 
@@ -34,6 +36,8 @@ You should be able to create a table and add users, delete or update.
     freeConnection(cls, Connection)
     closeConnections(cls)
 
+------------------
+
 ## PoolCursor
 
 **Parameters:**
@@ -53,6 +57,7 @@ Manage the connection and cursor objects obtained over an pool connection.
 
 _enter_ and _exit_ methods are for the `with` implementation to work with cursor.
 
+----------------------
 
 ## User
 
@@ -72,6 +77,7 @@ _enter_ and _exit_ methods are for the `with` implementation to work with cursor
 
     Create User objects.
 
+----------------------
 
 ## UserDAO
 
@@ -94,6 +100,7 @@ _enter_ and _exit_ methods are for the `with` implementation to work with cursor
 
     Handle CRUD operations (Create, Read, Update, Delete) over User.
 
+-----------------------
 
 ## Logger_base
 
@@ -105,6 +112,7 @@ _enter_ and _exit_ methods are for the `with` implementation to work with cursor
 
     Configure logging for all the app.
 
+----------------------
 
 ## MenuUserApp
 

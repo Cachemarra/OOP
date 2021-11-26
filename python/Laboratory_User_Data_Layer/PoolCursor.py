@@ -61,7 +61,7 @@ if __name__ == '__main__':
         # Creating a query to the database.
         cursor.execute('SELECT * FROM person')
         rows = cursor.fetchall()
-
+        # Checking the data retrieved.
         for row in rows:
             print(row)
     
