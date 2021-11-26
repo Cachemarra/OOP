@@ -1,2 +1,4 @@
 07:54:51 PM: DEBUG [db_classes_p1.py:139] [SUCCESS] Connected to Database <connection object at 0x0000025D0E2BC370; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
 07:54:51 PM: DEBUG [db_classes_p1.py:156] [SUCCESS] Cursor created <cursor object at 0x0000025D0E51B9E0; closed: 0>
+11:51:11 AM: DEBUG [db_classes_p1.py:139] [SUCCESS] Connected to Database <connection object at 0x00000229C21AC370; dsn: 'user=postgres password=xxx dbname=test_db host=localhost port=5432', closed: 0>
+11:51:11 AM: DEBUG [db_classes_p1.py:156] [SUCCESS] Cursor created <cursor object at 0x00000229C240C9E0; closed: 0>
