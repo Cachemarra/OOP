@@ -1,4 +1,4 @@
-# What's the project?=
+# What's the project?
 
 Create a user data layer with postgreSQL or another SQL engine.
 
