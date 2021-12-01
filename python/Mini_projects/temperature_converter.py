@@ -12,7 +12,7 @@ class temperature_converter:
     @classmethod
     def celsius_to_fahrenheit(cls, celsius):
         if celsius > cls.MAX_CELSIUS:
-            raise ValueError(f'Very high temperature: {celsius}. Max is {cls.MAX_CELSIUS}')
+            raise ValueError(f'[ERROR] Very high temperature: {celsius}. Max permited is {cls.MAX_CELSIUS}')
         # Else return the convertion
         return celsius * (9/5) + 32
     
@@ -21,7 +21,7 @@ class temperature_converter:
     @classmethod
     def fahrenheit_to_celsius(cls, fahrenheit):
         if fahrenheit > cls.MAX_FAHRENHEIT:
-            raise ValueError(f'Very high temperature: {fahrenheit}. Max is {cls.MAX_FAHRENHEIT}')
+            raise ValueError(f'[ERROR] Very high temperature: {fahrenheit}. Max permited is {cls.MAX_FAHRENHEIT}')
         # Else return the convertion
         return (fahrenheit - 32) * (5/9)
 
@@ -41,10 +41,20 @@ if __name__ == '__main__':
     celsius = 120
     fahrenheit = 150
 
-    ans1 = temperature_converter.celsius_to_fahrenheit(celsius=celsius)
-    ans2 = temperature_converter.fahrenheit_to_celsius(fahrenheit)
-
     print('Second test'.center(45, '-'))
-    print(f'Celsius to Fahrenheit. {celsius} ºC are {ans1} ºF')
-    print(f'Fahrenheit to Celsius. {fahrenheit} ºF are {ans2} ºC')
+    try:
+        ans1 = temperature_converter.celsius_to_fahrenheit(celsius=celsius)
+        print(f'Celsius to Fahrenheit. {celsius} ºC are {ans1} ºF')
+    except Exception as err:
+        print(err)
+    
+    try:
+        ans2 = temperature_converter.fahrenheit_to_celsius(fahrenheit)
+        print(f'Fahrenheit to Celsius. {fahrenheit} ºF are {ans2} ºC')
+    except Exception as err:
+        print(err)
 
+
+
+
+# %%
