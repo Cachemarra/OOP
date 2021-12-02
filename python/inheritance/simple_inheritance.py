@@ -73,9 +73,6 @@ class IntList(SimpleList):
         super().add(element)
 
 
-
-
-
 # Test
 
 if __name__ == '__main__':
